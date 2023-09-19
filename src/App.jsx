@@ -1,9 +1,48 @@
-function App() {
-  return (
-    <>
-      <h1>Vite + React</h1>
-    </>
-  );
-}
+import { useState } from "react";
+import { questions } from "./Questions/questionsData";
 
-export default App;
+export const App = () => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [showScore, setShowScore] = useState(false);
+  const [score, setScore] = useState(0);
+
+  const handleAnswerOptionClick = (isCorrect) => {
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+
+    const nextQuestion = currentQuestion + 1;
+    if (nextQuestion < questions.length) {
+      setCurrentQuestion(nextQuestion);
+    } else {
+      setShowScore(true);
+    }
+  };
+  return (
+    <div>
+      {showScore ? (
+        <div>
+          You scored {score} out of {questions.length}
+        </div>
+      ) : (
+        <>
+          <div>
+            <div>
+              <span>Question {currentQuestion + 1}</span>/{questions.length}
+            </div>
+            <div>{questions[currentQuestion].questionText}</div>
+          </div>
+          <div>
+            {questions[currentQuestion].answerOptions.map((answerOption) => (
+              <button
+                onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
+              >
+                {answerOption.answerText}
+              </button>
+            ))}
+          </div>
+        </>
+      )}
+    </div>
+  );
+};
