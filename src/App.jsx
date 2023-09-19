@@ -1,48 +1,95 @@
 import { useState } from "react";
 import { questions } from "./Questions/questionsData";
+import { Result } from "./Result";
+import {
+  Box,
+  Button as ChakraButton,
+  Flex,
+  Text,
+  Center,
+} from "@chakra-ui/react";
 
 export const App = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
 
-  const handleAnswerOptionClick = (isCorrect) => {
+  const handleAnswerOptionClick = (answerText, isCorrect) => {
     if (isCorrect) {
-      setScore(score + 1);
+      setScore(score + 1); // isCorrectがtrue(正解)ならscore+1
     }
 
-    const nextQuestion = currentQuestion + 1;
+    setUserAnswers((prevAnswers) => [...prevAnswers, answerText]); //　全ての問題の解答を持った配列
+
+    const nextQuestion = currentQuestion + 1; // 次の問題に進む
     if (nextQuestion < questions.length) {
+      // nextQuestionが問題数より小さいと次の問題へ、大きければスコアを表示
       setCurrentQuestion(nextQuestion);
     } else {
       setShowScore(true);
     }
   };
   return (
-    <div>
+    <Center h="100vh">
       {showScore ? (
-        <div>
-          You scored {score} out of {questions.length}
-        </div>
+        <Box>
+          <Result questions={questions} userAnswers={userAnswers} />
+        </Box>
       ) : (
-        <>
-          <div>
-            <div>
+        <Flex direction="column" align="center" justify="center" w="full">
+          <Box mb="4">
+            <Text fontSize="xl">
               <span>Question {currentQuestion + 1}</span>/{questions.length}
-            </div>
-            <div>{questions[currentQuestion].questionText}</div>
-          </div>
-          <div>
-            {questions[currentQuestion].answerOptions.map((answerOption) => (
-              <button
-                onClick={() => handleAnswerOptionClick(answerOption.isCorrect)}
-              >
-                {answerOption.answerText}
-              </button>
-            ))}
-          </div>
-        </>
+            </Text>
+            <Box mt="4">{questions[currentQuestion].questionText}</Box>
+          </Box>
+          <Flex direction="column" align="center" spacing="4">
+            <Flex>
+              {questions[currentQuestion].answerOptions
+                .slice(0, 2)
+                .map((answerOption, index) => (
+                  <ChakraButton
+                    key={index}
+                    ml={index !== 0 ? "4" : "0"}
+                    my="2"
+                    w="200px"
+                    borderRadius="lg"
+                    onClick={() =>
+                      handleAnswerOptionClick(
+                        answerOption.answerText,
+                        answerOption.isCorrect
+                      )
+                    }
+                  >
+                    {answerOption.answerText}
+                  </ChakraButton>
+                ))}
+            </Flex>
+            <Flex>
+              {questions[currentQuestion].answerOptions
+                .slice(2, 4)
+                .map((answerOption, index) => (
+                  <ChakraButton
+                    key={index}
+                    ml={index !== 0 ? "4" : "0"}
+                    my="2"
+                    w="200px"
+                    borderRadius="lg"
+                    onClick={() =>
+                      handleAnswerOptionClick(
+                        answerOption.answerText,
+                        answerOption.isCorrect
+                      )
+                    }
+                  >
+                    {answerOption.answerText}
+                  </ChakraButton>
+                ))}
+            </Flex>
+          </Flex>
+        </Flex>
       )}
-    </div>
+    </Center>
   );
 };

@@ -1,9 +1,11 @@
 import React from "react";
-import { Button } from "../UIParts/Button";
+import { UIButton } from "../UIParts/UIButton";
+import { UIAlert } from "../UIParts/UIAlert";
+import { UIBadge } from "../UIParts/UIBadge";
 
 export const questions = [
   {
-    questionText: <Button />,
+    questionText: <UIButton />,
     answerOptions: [
       { answerText: "accordion", isCorrect: false },
       { answerText: "avatar", isCorrect: false },
@@ -12,16 +14,16 @@ export const questions = [
     ],
   },
   {
-    questionText: "Whats is the capital of France?",
+    questionText: <UIAlert />,
     answerOptions: [
-      { answerText: "New York", isCorrect: false },
-      { answerText: "New York", isCorrect: false },
-      { answerText: "New York", isCorrect: true },
+      { answerText: "alert", isCorrect: false },
+      { answerText: "accordion", isCorrect: false },
+      { answerText: "nanikasira", isCorrect: true },
       { answerText: "New York", isCorrect: false },
     ],
   },
   {
-    questionText: "Whats is the capital of France?",
+    questionText: <UIBadge count={6} />,
     answerOptions: [
       { answerText: "New York", isCorrect: false },
       { answerText: "New York", isCorrect: false },
