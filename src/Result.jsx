@@ -1,5 +1,5 @@
 import { Box, Text, VStack, Badge, Button } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom";
 
 export const Result = ({ questions, userAnswers }) => {
   return (
@@ -66,8 +66,8 @@ export const Result = ({ questions, userAnswers }) => {
         }{" "}
         out of {questions.length}
       </Text>
-      <Button borderRadius="full">
-        <Link to="/">Topに戻る</Link>
+      <Button as={RouterLink} to="/" borderRadius="full">
+        Topに戻る
       </Button>
     </VStack>
   );
