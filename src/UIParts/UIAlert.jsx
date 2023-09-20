@@ -1,18 +1,22 @@
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "@chakra-ui/react";
+import { Alert, AlertIcon, Stack } from "@chakra-ui/react";
 
 export const UIAlert = () => {
   return (
-    <Alert status="error">
-      <AlertIcon />
-      <AlertTitle>Your browser is outdated!</AlertTitle>
-      <AlertDescription>
-        Your Chakra experience may be degraded.
-      </AlertDescription>
-    </Alert>
+    <Stack spacing={3}>
+      <Alert status="error">
+        <AlertIcon />
+        There was an error processing your request
+      </Alert>
+
+      <Alert status="success">
+        <AlertIcon />
+        Data uploaded to the server.
+      </Alert>
+
+      <Alert status="info">
+        <AlertIcon />
+        Chakra is going live on August 30th.
+      </Alert>
+    </Stack>
   );
 };

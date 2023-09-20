@@ -16,9 +16,9 @@ export const questions = [
   {
     questionText: <UIAlert />,
     answerOptions: [
-      { answerText: "alert", isCorrect: false },
+      { answerText: "nanikasira", isCorrect: false },
       { answerText: "accordion", isCorrect: false },
-      { answerText: "nanikasira", isCorrect: true },
+      { answerText: "alert", isCorrect: true },
       { answerText: "New York", isCorrect: false },
     ],
   },
@@ -27,7 +27,7 @@ export const questions = [
     answerOptions: [
       { answerText: "New York", isCorrect: false },
       { answerText: "New York", isCorrect: false },
-      { answerText: "New York", isCorrect: true },
+      { answerText: "badge", isCorrect: true },
       { answerText: "New York", isCorrect: false },
     ],
   },

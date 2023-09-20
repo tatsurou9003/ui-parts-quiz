@@ -7,6 +7,8 @@ import {
   Flex,
   Text,
   Center,
+  Circle,
+  Badge,
 } from "@chakra-ui/react";
 
 export const App = () => {
@@ -30,6 +32,7 @@ export const App = () => {
       setShowScore(true);
     }
   };
+
   return (
     <Center h="100vh">
       {showScore ? (
@@ -38,13 +41,13 @@ export const App = () => {
         </Box>
       ) : (
         <Flex direction="column" align="center" justify="center" w="full">
-          <Box mb="4">
-            <Text fontSize="xl">
+          <Box mb="8">
+            <Text fontSize="xl" textAlign="center" mb={12}>
               <span>Question {currentQuestion + 1}</span>/{questions.length}
             </Text>
             <Box mt="4">{questions[currentQuestion].questionText}</Box>
           </Box>
-          <Flex direction="column" align="center" spacing="4">
+          <Flex direction="column" align="center" spacing="4" mt={12}>
             <Flex>
               {questions[currentQuestion].answerOptions
                 .slice(0, 2)
